@@ -1,0 +1,29 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+cookiecutter = "*"
+pytest-cookies = "*"
+pytest = "*"
+"flake8" = "*"
+
+[packages]
+numpy = "*"
+pandas = "*"
+{%- if cookiecutter.install_mlflow == 'yes' %}
+mlflow = "*"
+{%- endif %}
+{%- if cookiecutter.machine_or_deep == 'deep learning' %}
+tensorflow = "*"
+keras = "*"
+{%- else %}
+scikit-learn = "*"
+{%- endif %}
+atomicwrites =  "*"
+awscli = "*"
+fastparquet = "*"
+
+[requires]
+python_version = "3.7"
