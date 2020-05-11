@@ -9,7 +9,7 @@ numpy, pandas, [mlflow](http://mlflow.org), [tensorflow](http://tensorflow.org),
 
 Dask provides advanced parallelism for analytics, enabling performance at scale. ML Flow is an open source platform for the machine learning lifecycle. Keras is an API that is a central part of the TensorFlow 2.0 ecosystem, covering all of the machine learning workflow.
 
-After running this cookiecutter, you will have auto-generated deep learning feature, train, and predict python files with skeleton code to get you started with the tools listed above. Please see the resulting directory structure below.
+After running this cookiecutter, you will have auto-generated deep learning feature, train, and predict python files with skeleton code to get you started with the tools listed above (including a local atomic write utility). Please see the resulting directory structure below.
 
 #### [Project homepage](http://github.com/debbieliske/cookiecutter-data-science-deep-learning/)
 
