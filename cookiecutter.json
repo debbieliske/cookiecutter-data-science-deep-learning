@@ -52,5 +52,9 @@
         "Regression"
     ],
     "metric": "{%- if cookiecutter.classification_regression == 'classification' -%} R2 {%- else -%} RMSE {% endif %}",
-    "num_layers": "{%- if cookiecutter.machine_or_deep == 'deep learning' -%} 1 {%- else -%} N/A {% endif %}"
+    "num_layers": "{%- if cookiecutter.machine_or_deep == 'deep learning' -%} 1 {%- else -%} N/A {% endif %}",
+    "install_dask_machine_learning": [
+        "yes",
+        "no"
+    ]
 }

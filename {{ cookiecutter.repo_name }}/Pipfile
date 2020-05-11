@@ -21,6 +21,10 @@ keras = "*"
 {%- else %}
 scikit-learn = "*"
 {%- endif %}
+{%- if cookiecutter.install_dask_machine_learning == 'yes' %}
+dask_ml = "*"
+dask = "*"
+{%- endif %}
 atomicwrites =  "*"
 awscli = "*"
 fastparquet = "*"
