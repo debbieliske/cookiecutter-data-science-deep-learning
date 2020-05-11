@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/debbieliske/cookiecutter-data-science-deep-learning.svg?branch=master)](https://travis-ci.com/debbieliske/cookiecutter-data-science-deep-learning)
+
 # Cookiecutter Data Science for Deep Learning and MLFlow
 
 _"A logical, reasonably standardized, but flexible project structure for doing and sharing data science work..." specific to Deep
