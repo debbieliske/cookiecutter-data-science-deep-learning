@@ -12,8 +12,8 @@ install:
 
 stages:
   - test
-  - name: answers
-    if: branch = master
+  # - name: answers
+  #   if: branch = master
 
 jobs:
   include:
@@ -28,6 +28,6 @@ jobs:
       script: pytest --cov-report xml --cov-report term
       after_script:
         - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
-    - stage: answers
-      script:
-      - python3 -m pset_4
+    # - stage: answers
+    #   script:
+    #  

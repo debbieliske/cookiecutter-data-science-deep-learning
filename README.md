@@ -1,12 +1,19 @@
-# Cookiecutter Data Science for Deep Learning
+# Cookiecutter Data Science for Deep Learning and MLFlow
 
 _"A logical, reasonably standardized, but flexible project structure for doing and sharing data science work..." specific to Deep
 Learning (or Machine Learning). This cookiecutter is initially based on cookie-cutter-data-science and is extended to set up skeleton code for deep learning projects._
 
+This cookiecutter utilizes tensorflow, Keras, MLFlow and Dask as it's core functionality. By default, it installs the following in the pipfile:
+
+numpy, pandas, [mlflow](http://mlflow.org), [tensorflow](http://tensorflow.org), [keras](http://keras.io), [dask_ml](http://dask.org), [dask](http://dask.org), atomicwrites (an internal utility), awscli, fastparquet (for using Parquet data containers)
+
+Dask provides advanced parallelism for analytics, enabling performance at scale. ML Flow is an open source platform for the machine learning lifecycle. Keras is an API that is a central part of the TensorFlow 2.0 ecosystem, covering all of the machine learning workflow.
+
+After running this cookiecutter, you will have auto-generated deep learning feature, train, and predict python files with skeleton code to get you started with the tools listed above (including a local atomic write utility). Please see the resulting directory structure below.
 
 #### [Project homepage](http://github.com/debbieliske/cookiecutter-data-science-deep-learning/)
 
-(Note that much has been hard coded for now.)
+
 
 ### Requirements to use the cookiecutter template:
 -----------
@@ -30,8 +37,6 @@ $ conda install cookiecutter
 
     cookiecutter https://github.com/drivendata/cookiecutter-data-science-deep-learning
 
-
-[![asciicast](https://asciinema.org/a/244658.svg)](https://asciinema.org/a/244658)
 
 
 ### The resulting directory structure

@@ -15,42 +15,59 @@ def import_mlflow_packages(mlflow):
     return import_cmd
 
 
+def import_dask(install_dask_machine_learning):
+    if install_dask_machine_learning == "yes":
+        import_cmd = "import dask_ml"
+    return import_cmd
+
+
 def example_code_for_now():
     mlflow_start = """
-    with mlflow.start_run():
+    # with mlflow.start_run():
     """
 
     mlflow_params_metrics = """    
         # Log parameter, metrics, and model to MLflow
-        mlflow.log_param('activation', config[1])
-        mlflow.log_param('initializer', config[2])
-        mlflow.log_param('optimizer', config[3])
-        mlflow.log_param('neurons', config[4])
-        mlflow.log_param('epochs', epochs)
-        mlflow.log_param('Model', model_type)
-        mlflow.log_metric('Pearson r', baseline_holdout_results.iloc[0]['Pearson r'])
-        mlflow.log_metric('R squared', baseline_holdout_results.iloc[0]['R squared']) """
+        # mlflow.log_param('activation', config[1])
+        # mlflow.log_param('initializer', config[2])
+        # mlflow.log_param('optimizer', config[3])
+        # mlflow.log_param('neurons', config[4])
+        # mlflow.log_param('epochs', epochs)
+        # mlflow.log_param('Model', model_type)
+        # mlflow.log_metric('Pearson r', baseline_holdout_results.iloc[0]['Pearson r'])
+        # mlflow.log_metric('R squared', baseline_holdout_results.iloc[0]['R squared']) """
 
     cnn = """
-    verbose, epochs, batch_size = ..., ..., ...
-    n_timesteps, n_features, n_outputs = trainX.shape[1], trainX.shape[2], trainy.shape[1]
-    model = Sequential()
-    model.add(Conv1D(filters=..., kernel_size=..., activation=..., input_shape=(..,..)))
-    model.add(Dropout(...))
-    model.add(MaxPooling1D(pool_size=...))
-    model.add(Flatten())
-    model.add(Dense(n_outputs, activation='softmax'))
-    model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
-    """
+        # verbose, epochs, batch_size = ..., ..., ...
+        # n_timesteps, n_features, n_outputs = trainX.shape[1], trainX.shape[2], trainy.shape[1]
+        # model = Sequential()
+        # model.add(Conv1D(filters=..., kernel_size=..., activation=..., input_shape=(..,..)))
+        # model.add(Dropout(...))
+        # model.add(MaxPooling1D(pool_size=...))
+        # model.add(Flatten())
+        # model.add(Dense(n_outputs, activation='softmax'))
+        # model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+        """
 
     fit = """
 
         # fit network
-        model.fit(trainX, trainy, epochs=epochs, batch_size=batch_size, verbose=verbose)
-        _, accuracy = model.evaluate(testX, testy, batch_size=batch_size, verbose=0)
+        # model.fit(trainX, trainy, epochs=epochs, batch_size=batch_size, verbose=verbose)
+        # _, accuracy = model.evaluate(testX, testy, batch_size=batch_size, verbose=0)
         """
 
-    return mlflow_start, mlflow_params_metrics, cnn, fit
+    dask = """
+        # Example dask set up code
+        # from dask.distributed import Client, LocalCluster, progress
+        # import joblib
+
+        # If you want Dask to set itself up on your personal computer
+        # cluster = LocalCluster(processes=False,n_workers=4, threads_per_worker=1) 
+        # client = Client(cluster) # create local cluster 
+
+        # client
+        """
+    return mlflow_start, mlflow_params_metrics, cnn, fit, dask
 
 
 def check_norm_data_for_features():
@@ -79,6 +96,7 @@ def main():
 
     import_mldl_cmd = import_mldl_packages("{{ cookiecutter.machine_or_deep }}")
     import_mlflow_cmd = import_mlflow_packages("{{ cookiecutter.install_mlflow }}")
+    import_dask_cmd = import_dask("{{ cookiecutter.install_dask_machine_learning }}")
 
     TRAIN_FILE = "../{{ cookiecutter.repo_name }}/src/models/train_model.py"
     PREDICT_FILE = "../{{ cookiecutter.repo_name }}/src/models/predict_model.py"
@@ -86,8 +104,8 @@ def main():
         "../{{cookiecutter.repo_name }}/src/features/build_features.py"
     )
 
-    mlflow_start, mlflow_params_metrics, cnn, fit = example_code_for_now()
-    train_config = [import_mldl_cmd, cnn]
+    mlflow_start, mlflow_params_metrics, cnn, fit, dask = example_code_for_now()
+    train_config = [import_mldl_cmd, import_dask_cmd, cnn, dask]
     feature_config = [check_norm_data_for_features()]
 
     with io.open(TRAIN_FILE, "w", encoding="utf-8") as filehandle:
@@ -97,6 +115,7 @@ def main():
     predict_config = [
         import_mlflow_cmd,
         import_mldl_cmd,
+        import_dask_cmd,
         "mlflow.set_experiment('{}')".format("{{cookiecutter.ml_flow_experiment_id}}"),
         "mlflow.set_tracking_uri('{}')".format("{{cookiecutter.ml_flow_tracking_uri}}"),
         mlflow_start,
